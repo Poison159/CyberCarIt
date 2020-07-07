@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="default">
+    <ion-buttons slot="start">
+      <ion-back-button color="success"></ion-back-button>
+    </ion-buttons>
+    <ion-chip slot="end" style="font-weight: bold;" color="success">Card Details</ion-chip>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="default">
+  <br/>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-button expand="full" size="small" color="success" (click)="encodeText(cardNumber)"><ion-icon name="qr-code-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button expand="full" size="small" color="success" href="https://{{web}}"><ion-icon name="globe-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button expand="full" size="small" color="success" (click)="goToEdit()"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button expand="full" size="small" color="success" (click)="presentModal(card.Id)"><ion-icon name="close-outline"></ion-icon></ion-button> 
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br/>
+  <ion-img [src]="url"></ion-img>
+  
+
+</ion-content>

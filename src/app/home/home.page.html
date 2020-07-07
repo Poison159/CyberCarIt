@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="default">
+    <img  style="width:50px; height:50px; border-radius:90%" [src]="imgUrl"/>
+    <ion-icon (click)="addCard()" color="success" style="zoom:2.0;padding-left: 8px; padding-right: 4px;" name="add-circle-outline" slot="end"></ion-icon>
+    <ion-icon (click)="clearCards()" color="success" style="zoom:2.0;padding-left: 8px; padding-right: 4px;" name="exit" slot="end"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="default" [fullscreen]="true">
+  
+  <ion-refresher color="dark" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      color="dark"
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card color="default" *ngFor="let card of cards ; let i = index" 
+    (click)="encode(card.Id, merchants[i].Name,merchants[i].Website)" style="object-fit: cover;background-repeat:no-repeat;background-size:100%;height: 32%;" [ngStyle]="{ 'background-image': 'url(' + merchants[i].ImagePath + ')'}">
+      <ion-card-title>
+        <ion-toolbar>
+          {{merchants[i].Name}}
+          <p style="padding-right: 25px;" color="dark" slot="end">{{card.CardNumber}}</p>
+        </ion-toolbar>
+      </ion-card-title>
+  </ion-card>
+</ion-content>

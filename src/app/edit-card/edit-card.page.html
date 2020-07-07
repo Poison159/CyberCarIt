@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="default"> 
+    <ion-buttons slot="start">
+      <ion-back-button color="success"></ion-back-button>
+    </ion-buttons>
+    <ion-chip slot="end" color="success">Edit Card</ion-chip>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="default">
+  <ion-card color="default">
+    <ion-item color="default">{{name}}</ion-item>
+    <ion-card-content>
+      <ion-input  position="floating" [(ngModel)]="CardNumber"></ion-input>
+      <ion-button color="success" size="small"  expand="full" (click)="edit()"><p style="zoom:1.4">Update </p></ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
