@@ -12,11 +12,12 @@ import {Storage} from '@ionic/storage';
 })
 export class LogInPage implements OnInit {
 
-  private email : string;
-  private password : string;
-  private confirmPassword : string;
-  private errMessage: string;
-  private user = new IUser();
+  public email : string;
+  public password : string;
+  public confirmPassword : string;
+  public errMessage: string;
+  public user = new IUser();
+  imgPath = '../../assets/icon.png';
 
   constructor(private authService: UserService ,private loadingController: LoadingController,
     public router: Router, private storage: Storage, private toastController : ToastController) { }

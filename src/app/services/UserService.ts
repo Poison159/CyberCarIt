@@ -8,11 +8,12 @@ import {Storage} from '@ionic/storage';
 @Injectable()
 export class UserService {
 
-    private Url                   = 'https://Carditweb.conveyor.cloud';
-    private localUrl              = 'https://192.168.8.101:45456/';
-    private _localRegisterUrl     = this.Url + '/api/RegisterUser';
-    private _localLoginUrl        = this.Url + '/api/CheckToken';
-    private _localUserDataUrl     = this.Url + '/api/UserData';
+    private Url                   = 'https://cardit.co.za/';
+    private testUrl               = 'https://carditweb.conveyor.cloud/'; 
+    private localUrl              = 'https://192.168.8.103:45455/';
+    private _localRegisterUrl     = this.Url + 'api/RegisterUser';
+    private _localLoginUrl        = this.Url + 'api/CheckToken';
+    private _localUserDataUrl     = this.Url + 'api/UserData';
 
     constructor(private _http: HttpClient, private storage: Storage){}
 

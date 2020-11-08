@@ -12,10 +12,11 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  private email : string;
-  private password : string;
-  private confirmPassword : string;
-  private errMessage: string;
+  public email : string;
+  public password : string;
+  public confirmPassword : string;
+  public errMessage: string;
+  imgPath = '../../assets/icon.png';
   constructor(private storage: Storage, 
               private loadingController: LoadingController,
               private authService: UserService,

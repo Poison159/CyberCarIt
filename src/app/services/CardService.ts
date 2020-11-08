@@ -5,15 +5,16 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CardService {
-    private Url                         = 'https://carditweb.conveyor.cloud/'; 
-    private localUrl                    = 'https://192.168.8.101:45456/'; 
+    private Url                         = 'https://cardit.co.za/';
+    private testUrl                     = 'https://carditweb.conveyor.cloud/'; 
+    private localUrl                    = 'https://192.168.8.103:45455/'; 
     private _userRegistration           =  this.Url + 'api/RegisterUser';
     private _userLogin                  =  this.Url + 'api/GetUserLogin';
     private _mechants                   =  this.Url + 'api/Merchants';
     private _addCard                    =  this.Url + 'api/AddCard';
     private _addMerchant                =  this.Url + 'api/AddMerchant'
     private _userUrl                    =  this.Url + 'api/users'
-    private _removeCard                 =  this.Url + 'api/cards'
+    private _removeCard                 =  this.Url + 'api/DeleteCard'
     private _editCard                   =  this.Url + 'api/Edit'
     
     constructor(private _http: HttpClient){}
@@ -43,7 +44,7 @@ export class CardService {
 
     removeCard(cardId:number, email:string) : Observable<any>{
         console.log('Removing Card ...');
-        return this._http.delete<any>(this._removeCard + '?id=' + cardId + '&email=' + email);
+        return this._http.get<any>(this._removeCard + '?id=' + cardId + '&email=' + email);
     }
 
     getCards(userId: number){

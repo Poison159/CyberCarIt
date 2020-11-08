@@ -11,12 +11,12 @@ import { ModalPagePage } from '../modal-page/modal-page.page';
 })
 export class BarcodePage implements OnInit {
 
-  private cardNumber: string;
-  private url : string;
-  private name : string;
-  private web : string;
-  private card : any;
-  private temp : any;
+  public cardNumber: string;
+  public url : string;
+  public name : string;
+  public web : string;
+  public card : any;
+  public temp : any;
 
   constructor(private route: ActivatedRoute,
     private barcodeScanner: BarcodeScanner, 
@@ -29,21 +29,22 @@ export class BarcodePage implements OnInit {
         this.card = JSON.parse(params.card);
         this.name = params.name;
         this.web = params.web;
-        this.temp = JSON.parse(params.temp);
-        this.url = 'https://carditweb.conveyor.cloud/Content/imgs/' + this.cardNumber + '.jpg';
+        if(params.temp)
+          this.temp = JSON.parse(params.temp);
+        this.url = 'https://cardit.co.za/Content/imgs/' + this.cardNumber + '.jpg';
       }
     });
   }
   ngOnInit() {
-    this.url = 'https://carditweb.conveyor.cloud/Content/imgs/' + this.cardNumber + '.jpg';
+    this.url = 'https://cardit.co.za/Content/imgs/' + this.cardNumber + '.jpg';
   }
 
-  encodeText(cardNumber: number) {
+  encodeText(cardNumber: any) {
     this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,cardNumber).then((encodedData) => {
         alert(encodedData);
       }, (err) => {
           console.log('Error occured : ' + err);
-          alert('error encodind');
+          alert('error encoding');
       });
   }
 

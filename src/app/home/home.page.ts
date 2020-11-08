@@ -13,11 +13,12 @@ import { LogModPage } from '../log-mod/log-mod.page';
 })
 export class HomePage {
   private email: string;
-  private imgUrl = '../../assets/images/icon.png';
+  public imgUrl = '../../assets/images/icon.png';
   private temp: any;
   private user: any;
-  private cards = new Array<any>();
-  private merchants = new Array<any>();
+  public tempCard: any;
+  public cards = new Array<any>();
+  public merchants = new Array<any>();
   private backButtonSubscription: any;
   constructor(private router: Router,
               public modalController: ModalController,
@@ -32,16 +33,22 @@ export class HomePage {
         if (params && params.token) {
           this.temp = JSON.parse(params.token);
           this.user = this.temp._user;
-          this.getCardsAndShowLoading();
         }
         if(params && params.card){
-          this.merchants.unshift(JSON.parse(params.merchant));
-          this.cards.unshift(JSON.parse(params.card));
-          
+          let card = JSON.parse(params.card);
+          let merchant = JSON.parse(params.merchant);
+          if(this.cards[0].Id !== card.Id){
+            this.merchants.unshift(merchant);
+            this.cards.unshift(card);
+          }
         }
         if(params && params.cardId){
           this.merchants = this.merchants.filter(x => x.Id != params.merchId);
           this.cards = this.cards.filter(x => x.Id != params.cardId);
+        }
+        if(params && params.newCard){
+          this.tempCard =  JSON.parse(params.newCard);
+          this.cards.filter(x => x.Id == this.tempCard.Id)[0].CardNumber = this.tempCard.CardNumber;
         }
       });
     }
@@ -75,7 +82,7 @@ export class HomePage {
         loading.dismiss();
       }, async error => {
         const toast = await this.toastController.create({
-          message: 'no cards found',
+          message: 'no cards found ❌',
           duration: 2000,
           position: 'middle'
         });
@@ -86,7 +93,7 @@ export class HomePage {
       });
     } else {
       const toast = await this.toastController.create({
-        message: 'no cards found',
+        message: 'no cards found ❌',
         duration: 2000,
         position: 'middle'
       });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardService } from '../services/CardService';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-edit-card',
@@ -9,17 +9,17 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-card.page.scss'],
 })
 export class EditCardPage implements OnInit {
-  private id: number;
-  private CardNumber: string;
-  private name: string;
-  private merchantId: number;
-  private userId:number; 
+  public id: number;
+  public CardNumber: string;
+  public name: string;
+  public merchantId: number;
+  public userId:number; 
 
   constructor(private cardService: CardService, 
-    private loadingContoller: LoadingController,
-    private toastController: ToastController,
-    private router: Router,
-    private route: ActivatedRoute) {
+    public loadingContoller: LoadingController,
+    public toastController: ToastController,
+    public router: Router,
+    public route: ActivatedRoute) {
       this.route.queryParams.subscribe(params => {
         if (params) {
           this.id= params.id;
@@ -37,7 +37,7 @@ export class EditCardPage implements OnInit {
   async edit(){
       if(this.CardNumber == ""){
         const toast = await this.toastController.create({
-          message: "please add card number",
+          message: "please add card number 🥺",
           duration: 2000,
           position: 'middle'
         });
@@ -52,12 +52,17 @@ export class EditCardPage implements OnInit {
           if(this.checkForErrors(res)){
             loading.dismiss();
           const toast = await this.toastController.create({
-            message: "Done! Refresh to see change.",
+            message: "Done ✅",
             duration: 2000,
             position: 'middle'
           });
           toast.present();
-          this.router.navigate(['home']);
+          const navigationExtras: NavigationExtras = {
+            queryParams: {
+              newCard : JSON.stringify(res),
+            }
+          }
+          this.router.navigate(['home'], navigationExtras);
         }else{
           const toast = await this.toastController.create({
             message: res.Errors,
@@ -69,7 +74,7 @@ export class EditCardPage implements OnInit {
         }
       }, async error => {
         const toast = await this.toastController.create({
-          message: "can't edit card",
+          message: "can't edit card ❌",
           duration: 2000,
           position: 'middle'
         });

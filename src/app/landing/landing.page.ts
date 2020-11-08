@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-
+  imgPath = '../../assets/icon.png';
   constructor(private router: Router) { }
 
   ngOnInit() {

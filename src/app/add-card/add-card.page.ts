@@ -17,7 +17,7 @@ import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx'
 export class AddCardPage implements OnInit {
   private user : any;
   private temp : any;
-  private merchants: any[];
+  public merchants: any[];
   private card : any;
   private merchant : any; 
 
@@ -58,7 +58,7 @@ export class AddCardPage implements OnInit {
       loading.dismiss();
     }, async error => {
       const toast = await this.toastController.create({
-        message: "can't get merchants",
+        message: "can't get merchants 😢",
         duration: 2000,
         position: 'middle'
       });
@@ -148,7 +148,7 @@ export class AddCardPage implements OnInit {
   async saveTolocalStorage(shopName: string, cardNumber: string, website:string, imagePath: string) {
     if(cardNumber == ""){
       const toast = await this.toastController.create({
-        message: "please add card number",
+        message: "please add card number ⛔",
         duration: 2000,
         position: 'middle'
       });
@@ -167,7 +167,7 @@ export class AddCardPage implements OnInit {
             this.merchant = cardRes.merchant;
             loading.dismiss();
             const toast = await this.toastController.create({
-              message: "card added!!",
+              message: "card added ✅",
               duration: 2000,
               position: 'middle',
               
@@ -182,7 +182,7 @@ export class AddCardPage implements OnInit {
             this.router.navigate(['home'], navigationExtras);
           }else{
             const toast = await this.toastController.create({
-              message: cardRes.Errors,
+              message: cardRes.Errors +" 😢",
               duration: 3000,
               position: 'middle'
             });
@@ -192,7 +192,7 @@ export class AddCardPage implements OnInit {
           
         }, async error => {
           const toast = await this.toastController.create({
-            message: "Can't add card. Please make sure card number or barcode is correct",
+            message: "Can't add card. Please make sure card number or barcode is correct ❌",
             duration: 3000
           });
           toast.present();
